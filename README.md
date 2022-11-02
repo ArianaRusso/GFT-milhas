@@ -1,5 +1,5 @@
 <h1>
-GFT-milhas
+GFT-MILHAS
 </h1>
 
 <p>Projeto desenvolvido para aplicação dos conceitos da arquitetura MVC (Model-View-Controller) durante o programa Strater Woman da 
