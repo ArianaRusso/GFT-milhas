@@ -2,7 +2,7 @@
 GFT-MILHAS
 </h1>
 
-<p>Projeto desenvolvido para aplicação dos conceitos da arquitetura MVC (Model-View-Controller) durante o programa Strater Woman da 
+<p>Projeto desenvolvido para aplicação dos conceitos da arquitetura MVC (Model-View-Controller) durante o programa Starter Woman da 
 <strong> <a href="https://www.gft.com/br/pt">GFT Brasil</a></strong> 🧡💛</p>
 
 <p>Aplicação web de gerenciamento de Eventos desenvolvido conforme o enunciado proposto como desafio.</p>
