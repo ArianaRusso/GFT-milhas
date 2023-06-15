@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	 <div class="alert alert-primary" th:if="${#lists.isEmpty(listGuest)}">	
+	 	Nenhum Participante encontrado
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text=="${mensagem}"></div>
+	<div class="card mb-3">
+		<div class="card-header">
+			<p class="text-primary">Filtrar Participante</p>
+		</div>
+		<div class="card-body">
+		<form method="GET">
+			<div class="form-group mb-3">
+					<label for="name">Nome: </label>
+					<input class="form-control" type="text" name="name" th:value"${name}"></input>
+			</div>
+			<div class="form-group mb-3">
+					<label for="fourletters">4 Letras: </label>
+					<input class="form-control" type="text" name="fourletters" th:value"${fourLetters}"></input>
+			</div>
+		<button type="submit" class="btn btn-primary">Pesquisar Participante</button>
+		</form>
+		</div>
+	</div>
+	<div th:if="${not #lists.isEmpty(listGuest)}">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>4 Letras</th>
+					<th>E-mail</th>
+					<th>Level</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="guest : ${listGuest}">
+					<td th:text="${guest.id}"></td>
+					<td th:text="${guest.name}"></td>
+					<td th:text="${guest.fourLetters}"></td>
+					<td th:text="${guest.email}"></td>
+					<td th:text="${guest.level}"></td>
+					<td>
+						<a class="btn btn-primary btn-sm" th:href="@{/guest/edit(id=${guest.id})}">Editar</a>
+						<a class="btn btn-primary btn-sm" th:href="@{/guest/delete(id=${guest.id})}" >Excluir</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</html>

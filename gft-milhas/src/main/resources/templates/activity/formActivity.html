@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text=="${mensagem}">
+		Nenhuma atividade cadastrada
+
+	</div>
+	<div class="card">
+		<div class="card-header">
+			<p class="text-primary">Nova atividade</p>
+		</div>
+	</div>
+	<div class="card-body">
+		<form method="post" th:object="${activity}" th:action="@{/activity/edit}">
+
+			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{event}">
+
+			<div class="form-group mb-3">
+				<label for="name">Nome</label>
+				<input class="form-control" type="text" th:field="*{name}" required></input>
+				<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+			</div>
+			<div class="form-group mb-3">
+				<label for="startDate">Data inicial</label>
+				<tr th:text="': '+${#dates.format(activity.startDate, 'dd/MM/yyyy')}" th:if="${activity.id != null}">
+				</tr>
+				<input class="form-control" type="text" id="_startDate"></input>
+				<input type="hidden" th:field="*{startDate}"></input>
+				<div class="text-danger" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></div>
+			</div>
+			<div class="form-group mb-3">
+				<label for="deliveryDate">Data final</label>
+				<tr th:text="': '+${#dates.format(activity.deliveryDate, 'dd/MM/yyyy')}" th:if="${activity.id != null}">
+				</tr>
+				<input class="form-control" type="text" id="_deliveryDate"></input>
+				<input type="hidden" th:field="*{deliveryDate}"></input>
+				<div class="text-danger" th:if="${#fields.hasErrors('deliveryDate')}" th:errors="*{deliveryDate}"></div>
+			</div>
+			<td><a class="btn btn-primary btn-sm" th:href="@{/event/edit?(id=${activity.event.id})}">Voltar</a></td>
+			<button type="submit" class="btn btn-primary">Salvar Atividade</button>
+			<div class="form-group mb-3">
+				<p>Participantes</p>
+
+				<div th:each="guest: ${listGuestsEvent}">
+					<input type="checkbox" th:id="${guest}" th:value="${guest.id}" th:field="*{guestsFinished}"></input>
+					<label th:text="${guest.name}"></label>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+
+</div>
+
+</div>
+<div layout:fragment="scripts">
+	<script>
+		$(function () {
+			$("#_startDate").datepicker({
+				dateFormat: "dd/mm/yy",
+				altFormat: "yy-mm-dd",
+				altField: "#startDate"
+			});
+
+			$("#_deliveryDate").datepicker({
+				dateFormat: "dd/mm/yy",
+				altFormat: "yy-mm-dd",
+				altField: "#deliveryDate"
+			});
+		});
+	</script>
+</div>
+
+</html>
